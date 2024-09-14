@@ -1,5 +1,6 @@
 library('tidyverse')
 library('tidyquant')
+library('ggplot2')
 
 beer_data <- read.csv("beer_consumption.csv")
 names(beer_data) <- c("Date",
@@ -27,3 +28,7 @@ invalid_entries <- grepl("invalid number", selected_data$Beer_Consumption_Liters
 selected_data <- selected_data[complete.cases(selected_data), ]
 
 M <- cor(selected_data)
+
+png("grafico.png", width = 2000, height = 600)
+plot(selected_data$Beer_Consumption_Liters, type = "o")
+dev.off()
